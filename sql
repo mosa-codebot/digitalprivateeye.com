@@ -1,0 +1,1 @@
+SELECT * FROM `paypal_payments` WHERE tx = '3HC068234V325734U'

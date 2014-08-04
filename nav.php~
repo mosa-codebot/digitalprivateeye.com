@@ -1,0 +1,101 @@
+<?php
+    session_start();
+    include_once("logic/Devices.php");
+    include_once("logic/Nav.php");
+    $devicesModel = new Devices();
+    $devices = $devicesModel->getDevices();
+
+var_dump($devicesModel->fetch_fb_fans('Airnovapl', 2, 400000));
+
+    $navModel = new Nav();
+    $registeredDevicesCount = 1000 + $navModel->getRegisteredDevicesCount();
+    $devicesModel->logIp($_SERVER['REMOTE_ADDR'], $_SERVER['REQUEST_URI']);
+?>
+
+<div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                    <a href="#none" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="fa fa-bars"></span>
+                        <span class="btn-navbar-text">Menu</span>
+                    </a>
+                    <a class="brand" href="index.php"><span class="logo"></span> <?=APPLICATION_NAME;?></a>
+                    <div class="navbar-collapse collapse">
+                        <div class="nav-menu pull-left">
+                            <ul class="nav nav-pills">
+                                <li><a href="blog.php">Blog</a></li>
+                                <li class="dropdown">
+                                    <a href="#none" class="dropdown-toggle" data-toggle="dropdown">Downloads <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="https://play.google.com/store/apps/details?id=com.digitalprivateeyespy" target="_blank">Digital Private Eye - Spy</a></li>
+                                        <li><a href="https://play.google.com/store/apps/details?id=com.digitalprivateeyeclient" target="_blank">Digital Private Eye - Viewer</a></li>
+                                    </ul>
+                                </li>
+                                <?php
+								if($_SESSION['user_id']) 
+								{
+                                echo  "<li class=\"dropdown\">
+                                    <a href=\"#none\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Subscription <b class=\"caret\"></b></a>
+                                    <ul class=\"dropdown-menu\">";
+                                       echo "<li><a href=\"coupons.php\">My Coupons</a></li>";
+                                       echo " <li><a href=\"payment.php\">Payment</a></li>
+                                    </ul>
+                                </li>";
+								}
+				else {
+					echo"<li><a href=\"payment.php\">Payments</a></li>";
+				}
+
+                                if($_SESSION['user_id'])   {
+                                    echo " <li class=\"dropdown\">
+                                    <a href=\"#none\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Devices <b class=\"caret\"></b></a>
+                                    <ul class=\"dropdown-menu\">";
+
+                                    if(!$devices) echo "<li><a href=\"#none\">No Devices Found</a></li>";
+                                    else {
+                                            foreach($devices as $device)
+                                            {
+                                                $deviceName = $device['deviceId'];
+                                                if($device['description']!= "Unlabelled Device") $deviceName = $device['description'];
+                                                $deviceId = $device['deviceId'];
+                                                $description = $device['description'];
+                                                echo "<li><a href=\"devices.php#".$deviceName."\">".$deviceName."</a></li>";
+                                            }
+                                }
+                                echo "</ul> </li>";
+                                }
+                                ?>
+
+                                <li class="dropdown">
+                                    <a href="#none" class="dropdown-toggle" data-toggle="dropdown">Information <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="contact.php">Contact</a></li>
+                                        <li><a href="faqs.php">FAQs</a></li>
+                                        <li><a href="guide.php">User Guide &amp; Documentation</a></li>
+                                        <li><a href="privacy-policy.php">Privacy Policy</a></li>
+                                        <li><a href="terms-of-use.php">Terms &amp; Conditions</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- end nav-menu -->
+                        <div class="nav-user pull-right">
+                            <ul class="nav nav-user-options">
+                                <?php
+                                    if(!$_SESSION['user_id'])    echo "<li class=\"login\"><a href=\"sign-in.php\" class=\"btn btn-light\">Login</a></li>";
+                                    if(!$_SESSION['user_id'])    echo "<li class=\"signup\"><a href=\"registration.php\" class=\"btn btn-purple\">Register</a></li>";
+                                    if(!$_SESSION['user_id'])    echo "<li class=\"login\"><a href=\"sign-in.php?guest\" class=\"btn btn-pink\">Guest Login</a></li>";
+                                    else echo "<li class=\"login\"><a href=\"sign-out.php\" class=\"btn btn-light\">Logout</a></li>";
+                                ?> <div style = 'text-align: right; font-size: small'><span style="color: gold; font-size: x-large"><?=$registeredDevicesCount?> </span>Devices Registered</div>
+                            </ul>
+
+
+                        </div><!-- end nav-user -->
+                    </div><!-- end navbar-collapse -->
+                </div><!-- end col-md-12 -->
+            </div><!-- end row fluid -->
+        </div><!-- end container -->
+    </div><!-- end navbar-inner -->
+</div><!-- end navbar -->
