@@ -174,6 +174,11 @@ class Devices{
     {
         return $this->dao->getDeviceContacts($this->userId, $deviceId, $page);
     }
+    
+    public function getDeviceContactsByUserId($deviceId, $page, $userId)
+    {
+        return $this->dao->getDeviceContacts($userId, $deviceId, $page);
+    }
 
     /**
      * Returns a list of user devices.

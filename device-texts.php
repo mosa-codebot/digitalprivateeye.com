@@ -42,41 +42,13 @@ $noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
-    <meta charset="utf-8">
     <title>Device Texts- <?=APPLICATION_NAME;?>- <?=$deviceDescription?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <!--[if IE 7]>
-      <link rel="stylesheet" href="css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Fav &amp; touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/sample/logo-144.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/sample/logo-114.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/sample/logo-72.png">
-                    <link rel="apple-touch-icon-precomposed" href="img/sample/logo-57.png">
-                                   <link rel="shortcut icon" href="img/sample/logo.png">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <?php include("partials/common-head.php");?>
   </head>
-
   <body>
-
-
   <?php
   include "nav.php";
   ?>
-
   <div class="clear"></div>
     
     <div class="container-wrapper container-top">
@@ -94,20 +66,7 @@ $noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
       <?php $classicUrl = str_replace("device-texts", "device-texts-classic", basename($_SERVER['REQUEST_URI'])); ?>
       <div  style="text-align: center; font-size: 12px;"><a href="<?=$classicUrl;?>" onclick='showLoadingDiv()'>View texts in classic mode</a></br></br></div>
       <div class="row">
-        <div class="col-md-3 bs-docs-nav-wrapper">
-          <ul class="nav nav-pills nav-stacked bs-docs-nav" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
-              <li><a  class="list-group-item"href="javascript: location.reload();" onclick='showLoadingDiv()'>Refresh Results&nbsp&nbsp<img src="img/refresh.png" style="width: 30px;"> </a></li>
-              <li><a  class="list-group-item"target="_blank" href="device-texts-pdf.php?device=<?=$deviceId?>" >Download Pdf&nbsp&nbsp<i class="fa fa-file-pdf-o fa-2x"></i>  </a></li>
-          </ul>
-
-            <ul class="nav nav-pills nav-stacked bs-docs-nav" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
-                <li><a  class="list-group-item" href="devices.php" onclick='showLoadingDiv()'>Devices</a></li>
-                <li><a  class="list-group-item" href="device-contacts.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Contacts</a></li>
-                <li><a  class="list-group-item" href="device-call-logs.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Call Logs</a></li>
-                <li><a  class="list-group-item" href="device-texts.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Text Messages</a></li>
-                <li><a  class="list-group-item" href="device-locations.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Locations</a></li>
-            </ul>
-        </div>
+        <?php include("partials/device-nav.php");?>
         <div class="col-md-2" style="background-color: rgba(241,241,192,0); padding-right: 20%; border: 0px;">
 
             <div class="table-responsive" style="border: 0px;  ">
