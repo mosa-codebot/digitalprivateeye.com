@@ -7715,7 +7715,6 @@ class TCPDF {
 				$this->Error('Incorrect output destination: '.$dest);
 			}
 		}
-                ob_end_clean(); //add this line here 
 		return '';
 	}
 

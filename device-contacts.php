@@ -22,7 +22,7 @@ $deviceInfo =  $devicesModel->getDeviceInfo($deviceId);
 $deviceDescription = $deviceInfo['description'];
 
 $ajaxParameters = array("function"=>"get-device-contacts", "device"=>"$deviceId", "val"=>"1");
-$ajaxParameters = json_encode($ajaxParameters);;
+$ajaxParameters = json_encode($ajaxParameters);
       
 ?>
 
