@@ -174,6 +174,11 @@ class Devices{
     {
         return $this->dao->getDeviceContacts($this->userId, $deviceId, $page);
     }
+    
+    public function getDeviceContactsByUserId($deviceId, $page, $userId)
+    {
+        return $this->dao->getDeviceContacts($userId, $deviceId, $page);
+    }
 
     /**
      * Returns a list of user devices.
@@ -259,6 +264,18 @@ class Devices{
     public function getDeviceTextsPeople($deviceId)
     {
         $textPhoneNumbers = $this->dao->getDeviceTextsPeople($deviceId);
+        return $textPhoneNumbers;
+    }
+    
+    /**
+     * Returns a devices text matching a particular phone number.
+     * @param type $deviceId
+     * @param type $phoneNumber
+     * @return type
+     */
+    public function getDeviceTextsPhoneNumberWPage($deviceId, $phoneNumber, $page)
+    {
+        $textPhoneNumbers = $this->dao->getDeviceTextsPhoneNumberWPage($deviceId, $phoneNumber, $page);
         return $textPhoneNumbers;
     }
 

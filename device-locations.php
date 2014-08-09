@@ -30,41 +30,12 @@ $noOfPages = ceil($noRecords/10);
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Device Locations - <?=APPLICATION_NAME;?>- <?=$deviceDescription?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <!--[if IE 7]>
-      <link rel="stylesheet" href="css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Fav &amp; touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/sample/logo-144.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/sample/logo-114.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/sample/logo-72.png">
-                    <link rel="apple-touch-icon-precomposed" href="img/sample/logo-57.png">
-                                   <link rel="shortcut icon" href="img/sample/logo.png">
-    
-  </head>
-
-  <body>
-
-
-  <?php
-  include "nav.php";
-  ?>
+<head>
+  <title>Device Locations - <?=APPLICATION_NAME;?>- <?=$deviceDescription?></title>
+  <?php include("partials/common-head.php");?>
+</head>
+<body>
+    <?php include "nav.php"; ?>
     
     <div class="clear"></div>
     
@@ -80,21 +51,8 @@ $noOfPages = ceil($noRecords/10);
 
   <?php $deviceId = $_GET['device'];?>
     <div class="container">
-      <div class="row">
-        <div class="col-md-3 bs-docs-nav-wrapper">
-          <ul class="nav nav-pills nav-stacked bs-docs-nav" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
-              <li><a  class="list-group-item"href="javascript: location.reload();" onclick='showLoadingDiv()'>Refresh Results&nbsp&nbsp<img src="img/refresh.png" style="width: 30px;"> </a></li>
-              <li><a  class="list-group-item"target="_blank" href="device-locations-pdf.php?device=<?=$deviceId?>">Download Pdf&nbsp&nbsp<img src="img/download-button.png" style="width: 30px;"> </a></li>
-          </ul>
-
-            <ul class="nav nav-pills nav-stacked bs-docs-nav" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
-                <li><a  class="list-group-item" href="devices.php" onclick='showLoadingDiv()'>Devices</a></li>
-                <li><a  class="list-group-item" href="device-contacts.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Contacts</a></li>
-                <li><a  class="list-group-item" href="device-call-logs.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Call Logs</a></li>
-                <li><a  class="list-group-item" href="device-texts.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Text Messages</a></li>
-                <li><a  class="list-group-item" href="device-locations.php?device=<?=$deviceId?>" onclick='showLoadingDiv()'>Locations</a></li>
-            </ul>
-        </div>
+      <div class="row">        
+        <?php include("partials/device-nav.php");?>
         <div class="col-md-8 col-md-offset-1">
 
 
@@ -112,11 +70,10 @@ $noOfPages = ceil($noRecords/10);
                     {
                         foreach($locations as $location)
                         {
-                            $id = $location['id'];
                             $locationDate = $location['date'];
                             $longitude = $location['longitude'];
                             $latitude = $location['latitude'];
-                            if($lonLatArray[$longitude.$latitude]) $address = $lonLatArray[$longitude.$latitude];
+                            if(array_key_exists($longitude.$latitude, $lonLatArray)) $address = $lonLatArray[$longitude.$latitude];
                             else
                             {
                                 $lonLatArray[$longitude.$latitude]= $address = $devicesModel->getAddressFromGoogleMaps($latitude, $longitude);

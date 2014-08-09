@@ -68,17 +68,26 @@ class dao
     public function getSqlData($sql)
     {
         $result_data_array = array();
-        $query_result = mysql_query($sql);
-        if($query_result){
-            while($row = mysql_fetch_assoc($query_result))
-            {
-                $result_data_array[] = $row;
+        try{
+            $connection = $this->db_connection;
+            if(!mysql_ping($connection))$connection = getDBConnection ();
+            
+            
+            $query_result = mysql_query($sql, $connection);
+            if($query_result){
+                while($row = mysql_fetch_assoc($query_result))
+                {
+                    $result_data_array[] = $row;
+                }
+                if (count($result_data_array)) {
+                    return $result_data_array;
+                }
             }
-            if (count($result_data_array)) {
-                return $result_data_array;
-            }
+            return null;
         }
-        return null;
+        catch(Exception $e){
+            echo $e;
+        }
     }
 
     public function getBlogEntries()
@@ -512,7 +521,7 @@ class dao
      * @return bool
      */
     public function getDeviceContacts($userId, $deviceId, $page)
-    {
+    {        
         if(!$page) $page=1;
         $startLimit = 0;
         $endLimit = 15;
@@ -648,7 +657,17 @@ class dao
                 as deviceContacts on RIGHT(deviceContacts.telephone_number, 7) = RIGHT(numbers.telephone, 7) ORDER BY text_date DESC";
         return $this->getSqlData($sql);
     }
-
+    
+    public function getDeviceTextsPhoneNumberWPage($deviceId, $phoneNumber, $page)
+    {
+        $numResults = 20;
+        $start= ($page *$numResults) - $numResults;
+        $limit = $numResults * $page;
+        $numToCompare = substr($phoneNumber, -7);
+        $sql = "SELECT * FROM text_messages WHERE deviceId = '$deviceId' AND telephone_number LIKE '%$numToCompare%' ORDER BY date DESC LIMIT $start, $limit ";
+        return $this->getSqlData($sql);
+    }
+    
     /**
      * Returns a device's texts
      * @param $userId
