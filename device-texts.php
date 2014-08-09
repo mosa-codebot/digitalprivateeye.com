@@ -19,11 +19,12 @@ $deviceInfo =  $devicesModel->getDeviceInfo($deviceId);
 $deviceDescription = $deviceInfo['description'];
 
 $textPeople =  $devicesModel->getDeviceTextsPeople($deviceId);
+if(array_key_exists('telephone', $_GET)) $telephoneNumber = $_GET['telephone'];
+else $telephoneNumber = $textPeople[0]['telephone'];
+
 $basePath = "";
 if(array_key_exists("REQUEST_URL", $_SERVER)) $basePath = $_SERVER['REQUEST_URL'];
 $currentUrl = $basePath . "?device=". $deviceId;
-$noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
-
 ?>
 
 <!DOCTYPE html>
