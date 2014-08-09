@@ -10,9 +10,6 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
 
 if(!$_SESSION['user_id']) header("Location: sign-in.php");
 
-$currentPage = $page = 1;      
-if(array_key_exists("page", $_GET)) 
-    $currentPage = $page = $_GET['page'];
 include("logic/Devices.php");
 
 $devicesModel = new Devices();
@@ -21,24 +18,11 @@ $deviceId = $_GET['device'];
 $deviceInfo =  $devicesModel->getDeviceInfo($deviceId);
 $deviceDescription = $deviceInfo['description'];
 
-
 $textPeople =  $devicesModel->getDeviceTextsPeople($deviceId);
-if(array_key_exists('telephone', $_GET)) $telephoneNumber = $_GET['telephone'];
-else $telephoneNumber = $textPeople[0]['telephone'];
-
-$limit= true;
-if(array_key_exists('no_limit',$_GET)) $limit= false;
-
-$telephoneTexts = $devicesModel->getDeviceTelephoneTexts($deviceId, $telephoneNumber, $limit);
-
 $basePath = "";
 if(array_key_exists("REQUEST_URL", $_SERVER)) $basePath = $_SERVER['REQUEST_URL'];
 $currentUrl = $basePath . "?device=". $deviceId;
 $noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
-
-
-$ajaxParameters = array("function"=>"get-device-texts", "device"=>"$deviceId", "val"=>"1", "phonenumber"=>"17808845042");
-$ajaxParameters = json_encode($ajaxParameters);
 
 ?>
 
@@ -222,8 +206,8 @@ $ajaxParameters = json_encode($ajaxParameters);
                 var MessageDate = localTime.toString().substring(0,25);                                        
                 html += "" + "<div class='text-messages-display' style='color: " + textColor + ";background-color: " + backgroundColor + ";'>" + message +" </br><span style='font-size: 10px;'>"+ MessageDate + "</span></div>"
            }console.log(telephone);
-           if((telephone==="")||(telephone===null)||(telephone===undefined)){alert("firde");
-               $('#text-results').append("<h2>Displaying messages from all numbers. Click on a contact/number to filter messages.</h2>");
+           if((telephone==="")||(telephone===null)||(telephone===undefined)){
+               $('#text-results').append("<h2>Displaying messages from all numbers. Click on a contact/number to filter messages.</h2>");$('#show-more-button').hide(); 
            }
             $('#text-results').append(html);
         }

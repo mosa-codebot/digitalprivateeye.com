@@ -10,7 +10,7 @@ function getDBConnection()
 {
     $ini_array = parse_ini_file("config.ini", true);
     $localhost = false;
-    $whitelist = array('127.0.0.1','::1');
+    $whitelist = array('127.0.0.1', '::1', '192.168.1.69', '192.168.1.73');
     $data_store_settings = $ini_array["db_connection"];
     $host = $data_store_settings["host"] ;
     $username = $data_store_settings["username"];
@@ -19,7 +19,11 @@ function getDBConnection()
 
     if(in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
         $localhost = true;
-        //$host = "www.digitalprivateeye.com";
+        $data_store_settings = $ini_array["db_connection_local"];
+        $host = $data_store_settings["host"] ;
+        $username = $data_store_settings["username"];
+        $password = $data_store_settings["password"];
+        $database = $data_store_settings["database"];
     }
         
     $connection = mysql_connect($host, $username, $password);
