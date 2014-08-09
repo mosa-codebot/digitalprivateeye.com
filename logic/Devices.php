@@ -266,6 +266,18 @@ class Devices{
         $textPhoneNumbers = $this->dao->getDeviceTextsPeople($deviceId);
         return $textPhoneNumbers;
     }
+    
+    /**
+     * Returns a devices text matching a particular phone number.
+     * @param type $deviceId
+     * @param type $phoneNumber
+     * @return type
+     */
+    public function getDeviceTextsPhoneNumberWPage($deviceId, $phoneNumber, $page)
+    {
+        $textPhoneNumbers = $this->dao->getDeviceTextsPhoneNumberWPage($deviceId, $phoneNumber, $page);
+        return $textPhoneNumbers;
+    }
 
     /**
      * Returns the device's texts.

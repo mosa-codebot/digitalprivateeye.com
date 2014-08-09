@@ -37,6 +37,9 @@ $currentUrl = $basePath . "?device=". $deviceId;
 $noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
 
 
+$ajaxParameters = array("function"=>"get-device-texts", "device"=>"$deviceId", "val"=>"1", "phonenumber"=>"17808845042");
+$ajaxParameters = json_encode($ajaxParameters);
+
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +47,28 @@ $noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
   <head>
     <title>Device Texts- <?=APPLICATION_NAME;?>- <?=$deviceDescription?></title>
     <?php include("partials/common-head.php");?>
+    
+    
+    <style>
+        .text-contact-button{
+            font-size: 14px; width: 100%;margin-bottom: 4px;border: 1px solid #949494; word-break: break-all;padding-right: 10px;white-space: normal; 
+        }
+        .active-contact{
+            border: none;
+        }
+        .text-messages-display{
+            min-width: 200px; width: 100%; text-align: right;border: 1px #ccc solid; border-radius: 5px; margin: 5px 0px 5px 0px ; padding: 20px 15px 20px 15px ;font-size: 14px;
+        }
+        /* iphones & small devices */
+        @media only screen and (max-width : 600px) {
+            /* Styles */
+            .text-contact-button{
+               width: 100%; 
+            }
+        }
+    
+    
+    </style>
   </head>
   <body>
   <?php
@@ -65,106 +90,63 @@ $noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
     <div class="container">
       <?php $classicUrl = str_replace("device-texts", "device-texts-classic", basename($_SERVER['REQUEST_URI'])); ?>
       <div  style="text-align: center; font-size: 12px;"><a href="<?=$classicUrl;?>" onclick='showLoadingDiv()'>View texts in classic mode</a></br></br></div>
-      <div class="row">
+      
         <?php include("partials/device-nav.php");?>
-        <div class="col-md-2" style="background-color: rgba(241,241,192,0); padding-right: 20%; border: 0px;">
-
-            <div class="table-responsive" style="border: 0px;  ">
-                <table   border="0" >
-                    <tr>
-                        <td style='padding-top:10px; word-wrap:break-word;'><strong></strong></td>
-                    </tr>
-                    <?php
-                    if(!$textPeople) echo "<tr><td> No data to display</td></tr>";
+          
+        <div class="col-xs-12 col-sm-3">
+            <?php
+                    if(!$textPeople) echo "<h2>No data to display.</h2>";
                     else
                     {
+                        $numbersDisplayingArray = array();//Shows users already being dos[;ayed. Used to remove duplicate names
                         foreach($textPeople as $person)
                         {
                             $personTelephone = $person['telephone'];
+                            
+                            if(!in_array(substr($personTelephone, -7), $numbersDisplayingArray)){
+                            $numbersDisplayingArray[] = substr($personTelephone, -7);
                             $lastTextDate = $person['text_date'];
                             $url = $currentUrl."&telephone=". $personTelephone;
-                            if((strstr($telephoneNumber, $personTelephone))&& ($personTelephone!="0")) $buttonColor = "btn-purple";
-                            else $buttonColor = "btn-white";
+                            if((strstr($telephoneNumber, $personTelephone))&& ($personTelephone!="0") && (filter_input(INPUT_GET, "telephone")!=null)) {
+                                $buttonColor = "btn-purple active-contact";
+                            }
+                            else 
+                            {
+                                $buttonColor = "btn-white";
+                            }
                             $name = $person['name'];
-                            if(!$name) $name = $personTelephone; //If there is no associated contact name, display the telephone number.
-                            echo "<tr>
-                                    <td style='padding-right:10px;'>
-                                        <a href=\"$url\" class=\"btn btn-md $buttonColor\" style=' font-size: 16px; width: 180px;' onclick='showLoadingDiv()'>$name</br>
-                                            <span style='font-size: 10px;'>
-                                                <script>
-                                                    var localTime = new Date($lastTextDate);
-                                                    document.write(localTime.toString().substring(0,25));
-                                                </script>
-                                            </span>
-                                        </a>
-                                    </td>
-                                  </tr>";
+                            if(!$name) {
+                                $name = $personTelephone; //If there is no associated contact name, display the telephone number.
+                            }
+                            echo "
+                                    <a href=\"$url\" class=\"btn btn-sm text-contact-button $buttonColor\" onclick='showLoadingDiv()'>$name</br>
+                                        <span style='font-size: 10px;'>
+                                            <script>
+                                                var localTime = new Date($lastTextDate);
+                                                document.write(localTime.toString().substring(0,25));
+                                            </script>
+                                        </span>
+                                    </a>
+                                ";                            
+                            }
                         }
                     }
                     ?>
-                </table>
-            </div>
-
         </div>
-          <div class="col-md-6" style="border: 0px #cccccc solid; padding: 15px 15px 15px 15px;">
-
-              <div class="table-responsive" style="width: 100%; border: 0px;">
-                  <table  border="0">
-                      <?php
-                      if(!$telephoneTexts) echo "<tr><td> No data to display</td></tr>";
-                      else
-                      {
-                      }
-                      foreach($telephoneTexts as $text)
-                      {
-                          $textType = $text['messageType'];
-                          if ($textType ==1) {
-                              //$textAlign = "left";
-                              $textColor = "#7C27CB";
-                              $backgroundColor = "#ececec";
-                          }
-                          else if($textType ==2) {
-                              //$textAlign = "right";
-                              $textColor = "green";
-                              $backgroundColor = "#fbfbfb";
-                          }
-                          $date = $text['date'];
-                          $textAlign = "left";
-                          $message = $text['message'];
-                          $messageDifferential = 100 - strlen($message);
-                          $message = $message . "</br>";
-                          for($i=1;$i<=$messageDifferential;$i++)
-                          {
-                              $message = $message . "&nbsp";
-                          }
-
-                          if(($textType ==1)||($textType ==2))
-                              echo "<tr>
-                                    <td  >
-                                        <div style='min-width: 300px; width: 100%; text-align: right; float: $textAlign; color: $textColor;
-                                         border: 1px #ccc solid; border-radius: 5px; background-color: $backgroundColor;
-                                         margin: 5px 0px 5px 0px ; padding: 20px 15px 20px 15px ;font-size: 14px;'>
-                                            $message </br>
-                                            <span style='font-size: 8px;'>
-                                                <script>
-                                                    var localTime = new Date($date);
-                                                    document.write(localTime.toString().substring(0,25));
-                                                </script>
-                                            </span>
-                                        </div>
-                                    </td>
-                                  </tr>";
-                      }
-                      if ($limit==true)echo " <tr><td style='text-align: center;'><div id='more'></br><a href=\"$noLimitUrl#more\" class=\"btn btn-md $buttonColor\">More .. . &nbsp; .</a></div></td></tr>";
-                      else echo " <tr><td style='text-align: center; font-style: italic; font-size: 10px;'><div id='more'></br>End of messages</div></td></tr>";
-                      ?>
-
-                  </table>
-              </div>
-          </div>
-
-          </div><!-- end row -->
-      </div><!-- end row -->
+      
+        <div class="col-xs-12 visible-xs">
+            <br><br><br><br><br><br>
+        </div>
+      
+      
+        <div class="col-xs-12 col-sm-6">
+            <div id="text-results">
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <button id="show-more-button" class="btn btn-md btn-primary">Show more</button>
+            </div>
+        </div>         
+      
     </div><!-- end container -->
 
     <div class="clear"></div>
@@ -178,13 +160,93 @@ $noLimitUrl = basename($_SERVER['REQUEST_URI'])."&no_limit=1";
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/zion.js"></script>
     <script type="text/javascript">
-      
+          
         $(document).ready(function(){
-          $("body").scrollspy({target: ".bs-docs-nav-wrapper", offset:50});
+            var page = 1;
+            <?php
+                $ajaxParameters = array("function"=>"get-device-texts", "device"=>"$deviceId", "val"=>"1");
+                $ajaxParameters = json_encode($ajaxParameters);            
+            ?>
+            var params = <?=$ajaxParameters;?>;            
+            var telephone = getUrlParameter('telephone');
+            params.phonenumber = telephone;
+            
+            $("body").scrollspy({target: ".bs-docs-nav-wrapper", offset:50});
+
+            makeTextsRequestCall(params, telephone);      
+            
+            $("#show-more-button").click(function() {
+                showLoadingDiv();
+                page = page+1;
+                params.val = page;
+                makeTextsRequestCall(params, telephone)
+            });
         });
+        
+        function makeTextsRequestCall(params, telephone)
+        {
+            $.get("logic/DevicesAJAX.php",params,
+                function(data) {
+                    if(data!=="null"){
+                        loadPhoneTextsResults(data, telephone);  
+                    }                 
+                    else{
+                        $('#text-results').append("<h4>No more messages.</h4>");
+                        $('#show-more-button').hide(); 
+                    }
+                    hideLoadingGif();
+                });    
+        }
+        
       
+        function loadPhoneTextsResults(data, telephone)
+        {
+            var rowData = jQuery.parseJSON(data);
+            $('#results-table tr').not(':first').not(':last').remove();
+            var html = '';
+            for(var i = 0; i < rowData.length; i++){
+                var message = rowData[i].message;
+                var messageDateEpoch = rowData[i].date + "";   
+                var messageType = rowData[i].messageType + ""; 
+                
+                var textColor = "#7C27CB";
+                var backgroundColor = "#ececec";
+                
+                if(messageType==="1") {//outgoing
+                    textColor = "green";
+                    backgroundColor = "#fbfbfb";
+                }
+                var localTime = new Date(0); 
+                localTime.setUTCSeconds(messageDateEpoch.substring(0,10));
+                var MessageDate = localTime.toString().substring(0,25);                                        
+                html += "" + "<div class='text-messages-display' style='color: " + textColor + ";background-color: " + backgroundColor + ";'>" + message +" </br><span style='font-size: 10px;'>"+ MessageDate + "</span></div>"
+           }console.log(telephone);
+           if((telephone==="")||(telephone===null)||(telephone===undefined)){alert("firde");
+               $('#text-results').append("<h2>Displaying messages from all numbers. Click on a contact/number to filter messages.</h2>");
+           }
+            $('#text-results').append(html);
+        }
+        
+        function getUrlParameter(sParam)
+        {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++)
+            {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] === sParam)
+                {
+                    return sParameterName[1];
+                }
+            }
+        }
+        
+        function hideLoadingGif()
+        {
+            $('#loading_gif').hide();           
+        }
+        
     </script>
 
   </body>

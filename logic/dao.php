@@ -657,7 +657,17 @@ class dao
                 as deviceContacts on RIGHT(deviceContacts.telephone_number, 7) = RIGHT(numbers.telephone, 7) ORDER BY text_date DESC";
         return $this->getSqlData($sql);
     }
-
+    
+    public function getDeviceTextsPhoneNumberWPage($deviceId, $phoneNumber, $page)
+    {
+        $numResults = 20;
+        $start= ($page *$numResults) - $numResults;
+        $limit = $numResults * $page;
+        $numToCompare = substr($phoneNumber, -7);
+        $sql = "SELECT * FROM text_messages WHERE deviceId = '$deviceId' AND telephone_number LIKE '%$numToCompare%' ORDER BY date DESC LIMIT $start, $limit ";
+        return $this->getSqlData($sql);
+    }
+    
     /**
      * Returns a device's texts
      * @param $userId
