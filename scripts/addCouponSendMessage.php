@@ -73,7 +73,13 @@ Best wishes from,
 $websiteUrl
 $appName ";
 
-    if($dao->addPaymentCoupon($payerId, $coupon_code, $creation_date, $expiry_date, $used, $paymentId, $daysToAdd));
-        $mailer->SendMail($subject, $body, $fromEmail, $fromName, $receiver);
+    if($dao->addPaymentCoupon($payerId, $coupon_code, $creation_date, $expiry_date, $used, $paymentId, $daysToAdd)){        
+        $mailer->fromEmail = "support@digitalprivateeye.com";
+        $mailer->fromName = "Digital Private Eye";
+        $mailer->replyTo = "support@digitalprivateeye.com";
+        $mailer->to = $receiver;
+        $mailer->subject = $subject;
+        $mailer->message = $body;
+        $mailer->SendMail();
+    }        
 }
-?>

@@ -1,15 +1,12 @@
 <?php
-
 include('Mailer.php');
 include('dao.php');
-
 $dao = new dao();
 $users = $dao->getAllUsers();
 $mailer = new Mailer();
 
 $fromEmail = "administrator@digitalprivateeye.com";
 $fromName = "Digital Private Eye";
-
 $appName = "Digital Private Eye";
 $subject = "Great News- DPEye Spy and DPEye Viewer";
 $websiteUrl = "http://digitalprivateeye.com";
@@ -65,4 +62,3 @@ $appName
 $websiteUrl";
 $mailer->SendMail($subject, $body, $fromEmail, $fromName, $receiver);
 }
-?>

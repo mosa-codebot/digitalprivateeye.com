@@ -58,8 +58,15 @@ Best wishes from,
 $websiteUrl
 $appName ";
 
-	$dao->addPaymentCoupon($userId, $couponCode, $creation_date, $expiry_date, $used, $paymentId, $daysToAdd);
-        $mailer->SendMail($subject, $body, $fromEmail, $fromName, $email);
-	$dao->MarkFBCouponCreated($userId);
+    
+    $mailer->fromEmail = "support@digitalprivateeye.com";
+    $mailer->fromName = "Digital Private Eye";
+    $mailer->replyTo = "support@digitalprivateeye.com";
+    $mailer->to = $email;
+    $mailer->subject = $subject;
+    $mailer->message = $body;
+    $mailer->SendMail();
+    
+    $dao->addPaymentCoupon($userId, $couponCode, $creation_date, $expiry_date, $used, $paymentId, $daysToAdd);
+    $dao->MarkFBCouponCreated($userId);
 }
-
