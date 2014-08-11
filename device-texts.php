@@ -44,6 +44,12 @@ $currentUrl = $basePath . "?device=". $deviceId;
         .text-messages-display{
             min-width: 200px; width: 100%; text-align: right;border: 1px #ccc solid; border-radius: 5px; margin: 5px 0px 5px 0px ; padding: 20px 15px 20px 15px ;font-size: 14px;
         }
+        .center{
+            text-align: center;
+        }
+        .bold{
+            font-weight: bold;
+        }
         /* iphones & small devices */
         @media only screen and (max-width : 600px) {
             /* Styles */
@@ -79,6 +85,7 @@ $currentUrl = $basePath . "?device=". $deviceId;
         <?php include("partials/device-nav.php");?>
           
         <div class="col-xs-12 col-sm-3">
+            <div class='visible-xs center bold'>Keep scrolling down to view text messages.<br><br></div>
             <?php
                     if(!$textPeople) echo "<h2>No data to display.</h2>";
                     else
@@ -198,7 +205,7 @@ $currentUrl = $basePath . "?device=". $deviceId;
                 var textColor = "#7C27CB";
                 var backgroundColor = "#ececec";
                 
-                if(messageType==="1") {//outgoing
+                if(messageType==="2") {//outgoing
                     textColor = "green";
                     backgroundColor = "#fbfbfb";
                 }
