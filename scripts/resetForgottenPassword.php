@@ -1,6 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-include('Mailer.php');
+
+include('../DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
@@ -48,7 +51,12 @@ Best wishes,
 $websiteUrl
 $appName ";
 
-
-        $mailer->SendMail($subject, $body, $fromEmail, $fromName, $email);
-	$dao->MarkResetEmailSent($email);
+    $mailer->fromEmail = "support@digitalprivateeye.com";
+    $mailer->fromName = "Digital Private Eye";
+    $mailer->replyTo = "support@digitalprivateeye.com";
+    $mailer->to = $email;
+    $mailer->subject = $subject;
+    $mailer->message = $body;
+    $mailer->SendMail();
+    $dao->MarkResetEmailSent($email);
 }

@@ -4,9 +4,9 @@
  *
  * @author mosa
  */
-class mailer {
+class Mailer {
     
-    public $from, $replyTo, $to, $subject, $message, $headers;
+    public $fromEmail, $fromName, $replyTo, $to, $subject, $message, $headers;
     
     public function __construct() {
         //$to  = 'aidan@example.com' . ', '; // note the comma
@@ -37,8 +37,11 @@ class mailer {
     }
     
     public function sendMail(){
-        if(!$this->from){
-            echo "Missing 'from' value \n";
+        if(!$this->fromEmail){
+            echo "Missing 'from Email' value \n";
+        }
+        else if(!$this->fromName){
+            echo "Missing 'from Name' value \n";
         }
         else if(!$this->replyTo){
             echo "Missing 'replyTo' value \n";
@@ -55,7 +58,7 @@ class mailer {
         else{            
             $this->headers  = 'MIME-Version: 1.0' . "\r\n";
             $this->headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-            $this->headers = "From: $this->from" . "\r\n" . "Reply-To: $this->replyTo" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+            $this->headers = "From: $this->fromName <$this->fromEmail>" . "\r\n" . "Reply-To: $this->replyTo" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
             mail($this->to, $this->subject, $this->message, $this->headers);   
         }
      
