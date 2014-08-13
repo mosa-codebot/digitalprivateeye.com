@@ -101,8 +101,9 @@
                                         echo "<li class=\"login\"><a href=\"sign-in.php\" class=\"btn btn-light\">Login</a></li>";
                                     if(!$userId) 
                                         echo "<li class=\"signup\"><a href=\"registration.php\" class=\"btn btn-purple\">Register</a></li>";
-                                    if(!$userId) 
-                                        echo "<li class=\"login\"><a href=\"sign-in.php?guest\" class=\"btn btn-pink\">Sample Login</a></li>";
+                                    if(!$userId) {
+                                        //echo "<li class=\"login\"><a href=\"sign-in.php?guest\" class=\"btn btn-pink\">Sample Login</a></li>";
+                                    }
                                     else echo "<li class=\"login\"><a href=\"sign-out.php\" class=\"btn btn-light\">Logout</a></li>";
                                     $registeredDevicesCount = 3000;
                                 ?>
