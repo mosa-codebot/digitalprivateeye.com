@@ -1,6 +1,8 @@
 <?php
-
-include('Mailer.php');
+/**
+ * Boost users time
+ */
+include('../DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
@@ -90,7 +92,13 @@ $websiteUrl/cancel-registration.php?user=$receiver&uid=$userId
 $websiteUrl
 $appName ";
 
-    if($dao->addBoostTime($deviceId, $trialDays))
-        $mailer->SendMail($subject, $body, $fromEmail, $fromName, $receiver);
+    if($dao->addBoostTime($deviceId, $trialDays)){        
+        $mailer->fromEmail = "support@digitalprivateeye.com";
+        $mailer->fromName = "Digital Private Eye";
+        $mailer->replyTo = "support@digitalprivateeye.com";
+        $mailer->to = $receiver;
+        $mailer->subject = $subject;
+        $mailer->message = $body;
+        $mailer->SendMail();
+    }
 }
-?>

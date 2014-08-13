@@ -1,6 +1,8 @@
 <?php
-
-include('Mailer.php');
+/**
+ * Sends all the messages in sent by users in the contact us form.
+ */
+include('DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
@@ -14,12 +16,14 @@ foreach($messages as $message)
     $userName = $message['name'];
     $messageBody = $message['message'];
     $timestamp = $message['timestamp'];
-
-    //var_dump($message);
-
+    $subject = "New message from ". $userName;
     $body = $messageBody . "\nreceived at " . $timestamp. "\n\nfrom, \n" . $userName . "\n" . $sender;
-    $mailer->SendMail("New message from ". $userName, $body, $sender, $userName, $receiver);
+    $mailer->fromEmail = $sender;
+    $mailer->fromName = $userName;
+    $mailer->replyTo = $receiver;
+    $mailer->to = $receiver;
+    $mailer->subject = $subject;
+    $mailer->message = $body;
+    $mailer->SendMail();
     $dao->setMessageSent($message['id']);
 }
-?>
-

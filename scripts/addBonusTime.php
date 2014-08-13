@@ -1,5 +1,5 @@
 <?php
-include('../DPEyeMailer/mailer.php');
+include('DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();

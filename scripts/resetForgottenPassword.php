@@ -1,4 +1,7 @@
 <?php
+/**
+ * Does password reset for users.
+ */
 include('../DPEyeMailer/mailer.php');
 include('dao.php');
 

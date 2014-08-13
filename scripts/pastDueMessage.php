@@ -1,16 +1,16 @@
 <?php
-
-include('Mailer.php');
+/**
+ * Sends a message to a user when their device is about to expire.
+ */
+include('DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
 $daysToExpiry = 3;
 $devices = $dao->getExpiredDevices();
 $mailer = new Mailer();
-
 $fromEmail = "administrator@digitalprivateeye.com";
 $fromName = "Digital Private Eye";
-
 $appName = "Digital Private Eye";
 $websiteUrl = "http://digitalprivateeye.com";
 $viewDevicesUrl = $websiteUrl."/devices.php";
@@ -85,6 +85,11 @@ $websiteUrl/cancel-registration.php?user=$receiver&uid=$userId
 $websiteUrl
 $appName ";
 
-    $mailer->SendMail($subject, $body, $fromEmail, $fromName, $receiver);
+    $mailer->fromEmail = "support@digitalprivateeye.com";
+    $mailer->fromName = "Digital Private Eye";
+    $mailer->replyTo = "support@digitalprivateeye.com";
+    $mailer->to = $receiver;
+    $mailer->subject = $subject;
+    $mailer->message = $body;
+    $mailer->SendMail();
 }
-?>

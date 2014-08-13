@@ -1,21 +1,17 @@
 <?php
-
-include('Mailer.php');
+include('DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
 $unfulfilledPayments = $dao->getUnfunfilledPayments();
 $mailer = new Mailer();
-
 $fromEmail = "administrator@digitalprivateeye.com";
 $fromName = "Digital Private Eye";
-
 $appName = "Digital Private Eye";
 $websiteUrl = "http://digitalprivateeye.com";
 $viewDevicesUrl = $websiteUrl."/devices.php";
 $appName = "Digital Private Eye";
 $viewCouponsUrl = $websiteUrl."/coupons.php";
-
 $completeRegistrationUrl = $websiteUrl."/registration.php";
 $signInUrl = $websiteUrl."/sign-in.php";
 $contactUsUrl = $websiteUrl."/contact.php";

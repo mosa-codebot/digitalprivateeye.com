@@ -1,16 +1,13 @@
 <?php
-
-include('Mailer.php');
+include('DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
 $usersToCredit = $dao->getUsersToCreditFB();
-
 $mailer = new Mailer();
 
 $fromEmail = "administrator@digitalprivateeye.com";
 $fromName = "Digital Private Eye";
-
 $appName = "Digital Private Eye";
 $websiteUrl = "http://digitalprivateeye.com";
 $viewDevicesUrl = $websiteUrl."/devices.php";
@@ -27,12 +24,10 @@ $paymentPageUrl = $websiteUrl."/payment.php";
 
 foreach($usersToCredit as $user)
 {
-
     $userId = $user['user_id'];
     $couponCode = "FaceBookLikeUsCoupon". "-". $userId;
     $email =  $user['username'];
     $daysToAdd =  $user['days_to_add'];
-
     $time = time();
     $creation_date = $time . "111";
     $expiry_date = ($time+64800)."111";
@@ -57,7 +52,6 @@ $websiteUrl/cancel-registration.php?user=$email&uid=$userId
 Best wishes from,
 $websiteUrl
 $appName ";
-
     
     $mailer->fromEmail = "support@digitalprivateeye.com";
     $mailer->fromName = "Digital Private Eye";
@@ -65,8 +59,7 @@ $appName ";
     $mailer->to = $email;
     $mailer->subject = $subject;
     $mailer->message = $body;
-    $mailer->SendMail();
-    
+    $mailer->SendMail();    
     $dao->addPaymentCoupon($userId, $couponCode, $creation_date, $expiry_date, $used, $paymentId, $daysToAdd);
     $dao->MarkFBCouponCreated($userId);
 }

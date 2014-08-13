@@ -1,6 +1,8 @@
 <?php
-
-include('Mailer.php');
+/**
+ * Sends newly registered users a message to verify their accounts by clicking a link.
+ */
+include('../DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
@@ -40,7 +42,14 @@ $websiteUrl/cancel-registration.php?user=$receiver&uid=$userId
 $websiteUrl
 $appName ";
 
-    $mailer->SendMail($subject, $body, $fromEmail, $fromName, $receiver);
+
+    $mailer->fromEmail = "support@digitalprivateeye.com";
+    $mailer->fromName = "Digital Private Eye";
+    $mailer->replyTo = "support@digitalprivateeye.com";
+    $mailer->to = $receiver;
+    $mailer->subject = $subject;
+    $mailer->message = $body;
+    $mailer->SendMail();
+    $dao->MarkResetEmailSent($email);
     $dao->setVerificationEmailSent($user['username']);
 }
-?>

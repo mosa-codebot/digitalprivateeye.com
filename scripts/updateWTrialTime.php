@@ -1,6 +1,8 @@
 <?php
-
-include('Mailer.php');
+/**
+ * Updates a users accoutn with trial time
+ */
+include('../DPEyeMailer/mailer.php');
 include('dao.php');
 
 $dao = new dao();
@@ -88,7 +90,13 @@ $websiteUrl/cancel-registration.php?user=$receiver&uid=$userId
 $websiteUrl
 $appName ";
 
-    if($dao->addTrialPeriod($deviceId, $trialDays))
-        $mailer->SendMail($subject, $body, $fromEmail, $fromName, $receiver);
+    if($dao->addTrialPeriod($deviceId, $trialDays)){
+        $mailer->fromEmail = "support@digitalprivateeye.com";
+        $mailer->fromName = "Digital Private Eye";
+        $mailer->replyTo = "support@digitalprivateeye.com";
+        $mailer->to = $receiver;
+        $mailer->subject = $subject;
+        $mailer->message = $body;
+        $mailer->SendMail();
+    }
 }
-?>
