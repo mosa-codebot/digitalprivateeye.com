@@ -136,9 +136,11 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
                 </ul>
             </p>
             <hr />
+            <div id="developer-options">
+                <br><br><br><br>
+            </div>
 
-
-            <h2 id="developer-options">Turning on Developer Options</h2>
+            <h2 >Turning on Developer Options</h2>
             <p>Here are some videos showing how to turn on developer options for different android devices. If you are unsure
             which Android version you device is running, checkout out the <a href="#android-version">Checking which Android version is running</a>
             section of this website.</p><br /><br />
