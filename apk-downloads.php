@@ -161,12 +161,13 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
             <p>
                 <div id="three-point-zero-iframe"> </div>
             </p>
-            <hr />
+            <hr />            
+            <div class="hidden">
+                <h2 id="scrollspy-credits">Credits</h2>
+                <p>Thank you for your interest in <?=APPLICATION_NAME;?>.</p>
+                <p>The application, the website, and APIs which are part of <?=APPLICATION_NAME;?> were developed by <?=OWNER;?>.</p>
+            </div>
 
-
-          <h2 id="scrollspy-credits">Credits</h2>
-          <p>Thank you for your interest in <?=APPLICATION_NAME;?>.</p>
-          <p>The application, the website, and APIs which are part of <?=APPLICATION_NAME;?> were developed by <?=OWNER;?>.</p>
           <p>&copy; Copyright 2014. All rights reserved.</p>
         </div>
       </div><!-- end row -->
