@@ -169,7 +169,7 @@ class dao
         }
         return $result_data_array;
     }
-    
+        
     public function deviceExists($deviceId)
     {
 	$sql = "SELECT `expiry_date` FROM `devices` WHERE deviceId = '$deviceId' ;";
