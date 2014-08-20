@@ -37,7 +37,7 @@
                     <div class="navbar-collapse collapse">
                         <div class="nav-menu pull-left">
                             <ul class="nav nav-pills">
-                                <li><a href="about.php">How it works</a></li>
+                                <li><a href="how-it-works.php">How it works</a></li>
                                 <li class="dropdown">
                                     <a href="#none" class="dropdown-toggle" data-toggle="dropdown">Downloads <b class="caret"></b></a>
                                     <ul class="dropdown-menu">

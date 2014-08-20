@@ -43,13 +43,7 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
     
         <div class="container">
             <div class="row">
-                <div class="col-md-3 bs-docs-nav-wrapper">
-                    <ul class="nav nav-pills nav-stacked bs-docs-nav" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
-                        <li><a href="#spy" class="list-group-item">Digital Private Eye -Spy</a></li>
-                        <li><a href="#viewer" class="list-group-item">Digital Private Eye -Viewer</a></li>
-                    </ul>
-                </div>
-                
+               
                 <div class="col-md-8 col-md-offset-1">
                     <h3>Downloads from Google Play Store are currently disabled. </h3>
                     <p>

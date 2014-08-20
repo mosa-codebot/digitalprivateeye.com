@@ -2,7 +2,7 @@
 CONST APPLICATION_INITIALS = 'DPEye';
 CONST APPLICATION_WEBSITE = 'http://digitalprivateeye.com';
 CONST APPLICATION_NAME = 'Digital Private Eye';
-CONST APPLICATION_DOWNLOAD_URL = "https://play.google.com/store/apps/details?id=com.digitalprivateeyespy";
+CONST APPLICATION_DOWNLOAD_URL = "apk-downloads.php";
 CONST OWNER = 'Made Software Ltd';
 CONST FACEBOOK_URL = 'https://www.facebook.com/pages/Digital-Private-Eye/703312569701920';
 CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
@@ -40,8 +40,6 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
   </head>
 
   <body>
-
-
   <?php
   include "nav.php";
   ?>
@@ -73,11 +71,11 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
           <p>Using Digital Private Eye is a two step process.</p>
           <ul class="fa-ul">
             <li><span class="fa fa-li fa-android"></span>
-              <li>Bugging the target android phone or device.</li>
+                <li>Bugging the target android phone or device.</li>
             </li>
-              <li><span class="fa fa-li fa-android"></span>
-              <li>Viewing the phone data.</li>
-              </li>
+                <li><span class="fa fa-li fa-android"></span>
+                <li>Viewing the phone data.</li>
+            </li>
           </ul>
           <hr />
           <h2 id="scrollspy-bugging">Bugging the target android phone or device.</h2>
@@ -118,9 +116,7 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
               </li>
           </ul>
           <hr />
-          <h2 id="scrollspy-credits">Credits</h2>
-          <p>Thank you for your interest in <?=APPLICATION_NAME;?>.</p>
-          <p>The application, the website, and APIs which are part of <?=APPLICATION_NAME;?> were developed by <?=OWNER;?>.</p>
+          <h2 id="scrollspy-credits">Credits</h2>          
           <p>&copy; Copyright 2014. All rights reserved.</p>
         </div>
       </div><!-- end row -->
