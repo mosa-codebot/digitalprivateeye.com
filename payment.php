@@ -140,7 +140,7 @@ include "nav.php";
                                 </p>
                                 <p style="text-align: center; font-size: smaller;">
                                     <?php
-                                    if($_SESSION['user_id']) echo "
+                                    if(array_key_exists('user_id', $_SESSION)) echo "
                                     <form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">
                                     <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">
                                     <input type=\"hidden\" name=\"hosted_button_id\" value=\"DHRTBULMAXAX6\">

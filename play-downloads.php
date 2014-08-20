@@ -53,7 +53,7 @@ CONST LOGO_LARGE = "<img src=\"img/sample/logo.png\" style=\"width: 50px\">";
                 <div class="col-md-8 col-md-offset-1">
                     <h3>Downloads from Google Play Store are currently disabled. </h3>
                     <p>
-                        Don't worry, you can still download Digital Private Eye from the <a href="apk-downloads.php">APK downloads page</a>.
+                        Don't worry, you can still download Digital Private Eye from the <a style="text-decoration: underline; font-size: large;" href="apk-downloads.php">APK downloads page</a>.
                     </p>
                 </div>
 
