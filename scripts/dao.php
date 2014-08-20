@@ -49,6 +49,19 @@ class dao
         return $result_data_array;
     }
 
+    //Returns all devices
+    public function getAllDevices()
+    {
+        $sql = "SELECT * FROM `devices`";
+	$query = mysqli_query($this->db_connection, $sql) or trigger_error(mysql_error()." ".$sql);
+	$result_data_array = array();
+	while($row = mysqli_fetch_assoc($query))
+	{
+            $result_data_array[] = $row;
+        }
+        return $result_data_array;
+    }
+
     public function getUnwelcomedDevices()
     {
         $sql = "SELECT * FROM `devices` LEFT JOIN users ON (devices.user_id = users.user_id) WHERE devices.welcome_sent = '0' AND users.verified = '1';";
@@ -133,7 +146,7 @@ class dao
     public function addDeviceToActiveDevicesList($device)
     {
         $sql = "INSERT INTO `active_devices` (`device_id`) VALUES ('$device')
-		ON DUPLICATE KEY UPDATE device_id = device_id ;";	
+		ON DUPLICATE KEY UPDATE device_id = device_id ;";
         mysqli_query($this->db_connection, $sql);
     }
     
@@ -163,6 +176,15 @@ class dao
 	$query = mysqli_query($this->db_connection, $sql) or trigger_error(mysql_error()." ".$sql);
 	if(mysqli_fetch_assoc($query))
 	    return true;
+    }
+    
+    /**
+     * 
+     * @param type $deviceIdSets a device status to inactive
+     */
+    public function setDeviceInactive($deviceId){
+        $sql = "UPDATE `devices` SET `status` = '0' WHERE `devices`.`deviceId` = '$deviceId';";
+        return mysqli_query($this->db_connection, $sql);
     }
     
     public function getDeviceExpiryDate($deviceId)
