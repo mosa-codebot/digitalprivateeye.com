@@ -93,4 +93,3 @@ class AuthenticationHandler{
         return crypt ($password, $email);
     }
 }
-?>

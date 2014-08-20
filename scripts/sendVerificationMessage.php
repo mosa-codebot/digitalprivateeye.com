@@ -14,8 +14,6 @@ $fromName = "Digital Private Eye";
 $appName = "Digital Private Eye";
 $subject = "Verify Email Address - $appName";
 $websiteUrl = "http://digitalprivateeye.com";
-$contactUsUrl = $websiteUrl."/contact.php";
-$deletionDays = 14;
 $appName = "Digital Private Eye";
 
 foreach($users as $user)
@@ -33,12 +31,12 @@ To complete your registration, you must verify your email address by clicking he
 
 $verificationUrl
 
-Unverified email addresses will be deleted after 4 hours.
+Unverified email addresses will be deleted after 24 hours.
 
 If you received this email in error or you want your data purged off our systems, follow the link below
 $websiteUrl/cancel-registration.php?user=$receiver&uid=$userId
 
-
+Support Team
 $websiteUrl
 $appName ";
 
@@ -50,6 +48,5 @@ $appName ";
     $mailer->subject = $subject;
     $mailer->message = $body;
     $mailer->SendMail();
-    $dao->MarkResetEmailSent($email);
     $dao->setVerificationEmailSent($user['username']);
 }
