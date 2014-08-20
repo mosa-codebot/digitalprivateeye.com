@@ -17,4 +17,13 @@ foreach($devices as $device){
             echo $e;
         }
     }
+    else
+    {
+        try{            
+            $dao->setDeviceActive($deviceId);
+        }
+        catch(Exception $e){
+            echo $e;
+        }
+    }
 }

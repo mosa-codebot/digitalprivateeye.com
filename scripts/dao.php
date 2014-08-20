@@ -187,6 +187,16 @@ class dao
         return mysqli_query($this->db_connection, $sql);
     }
     
+    /**
+     * Sets a device's status to active
+     * @param type $deviceId
+     * @return type
+     */
+    public function setDeviceActive($deviceId){
+        $sql = "UPDATE `devices` SET `status` = '1' WHERE `devices`.`deviceId` = '$deviceId';";
+        return mysqli_query($this->db_connection, $sql);
+    }
+    
     public function getDeviceExpiryDate($deviceId)
     {
 	$currentDate = time();
