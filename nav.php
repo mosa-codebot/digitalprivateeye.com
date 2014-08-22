@@ -37,7 +37,10 @@
                     <div class="navbar-collapse collapse">
                         <div class="nav-menu pull-left">
                             <ul class="nav nav-pills">
-                                <li><a href="how-it-works.php">How it works</a></li>
+                                 <?php
+                                    if(!$userId) {?>
+                                        <li><a href="how-it-works.php">How it works</a></li>
+                                <?php } ?>
                                 <li class="dropdown">
                                     <a href="#none" class="dropdown-toggle" data-toggle="dropdown">Downloads <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
