@@ -19,7 +19,7 @@
                     <li><a href="privacy-policy.php">Privacy Policy</a></li>
                     <li><a href="terms-of-use.php">Terms and Conditions</a></li>
                 </ul>
-                <p>&copy; Copyright 2014. <a href="http://madesoftwareltd.com" target="_blank">Made Software Ltd.</a></p>
+                <p>&copy; Copyright 2014. Made Software Ltd</p>
             </div><!-- end col -->
         </div><!-- end row fluid -->
     </div><!-- end container -->
